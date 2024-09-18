@@ -7,12 +7,23 @@ def your_menu(foods):
         for dish in foods:
             print(f"{index}. {dish}")
             index += 1
-    
-        selected_choice = int(input("Your order number? "))
-        select_dish(foods, selected_choice - 1)
+        
+        is_valid = False
+        while not is_valid:
+            selected_choice = int(input("Your order number? "))
+            
+            if 1 <= selected_choice <= len(foods):
+                select_dish(foods, selected_choice - 1)
+                is_valid = True
+            else: 
+                print("Try again")
+                
     except IndexError as error:
         print(f"{error} was entered.")
         print("Next time try entering something on the menu!")
+    except ValueError as error:
+        print(f"{error} was entered.")
+        print("Choose a valid menu number to order on the menu!")
 
 menu_items = [
     "Yakisoba",
